@@ -1,0 +1,32 @@
+micronaut:
+  application:
+    name: javaMicronautSmartOvenApi
+  router:
+    versioning:
+      enabled: true
+      parameter:
+        enabled: true
+        names: 'v,api-version'
+      header:
+        enabled: true
+        names:
+          - 'X-API-VERSION'
+          - 'Accept-Version'
+
+endpoints:
+  beans:
+    enabled: true
+    sensitive: false
+  loggers:
+    enabled: true
+    sensitive: false
+  routes:
+    enabled: true
+    sensitive: false
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+
