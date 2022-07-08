@@ -2,6 +2,7 @@ package br.com.jamesson.service;
 
 import br.com.jamesson.client.DeclarativeCalibrationsClient;
 import br.com.jamesson.client.LowLevelCalibrationsClient;
+import br.com.jamesson.dto.calibration.CalibrationParameters;
 import br.com.jamesson.dto.calibration.CalibrationStatus;
 import br.com.jamesson.dto.calibration.CalibrationUpdateResult;
 import jakarta.inject.Singleton;
@@ -41,7 +42,7 @@ public class CalibrationService {
                 .doOnNext(parameters -> logger.info("Calibrations parameters received {}", parameters))
                 .doOnNext(parameters -> logger.info("Calibrations oven ..."))
                 .doOnNext(parameters -> logger.info("Oven calibration complete ! Sending updates to cloud..."))
-                .flatMap(parameters -> lowLevelClient.updateCalibrationStatus(new CalibrationStatus(OVEN_MODEL, SERIAL_NO, LocalDate.now()))
+                .flatMap(parameters -> declarativeClient.updateCalibrationParameters(new CalibrationParameters(OVEN_MODEL, 100, 100))
                         .doOnNext(updateResult -> logger.info("Update result received {}", updateResult)));
     }
 }
